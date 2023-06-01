@@ -20,8 +20,31 @@ const injectContext = PassedComponent => {
 					})
 			})
 		);
-
+	function App() {
+		const[people, setPeople] = useState([]);
+		const [planets, setPlanets] = useState([]);
+		const [vehicles, setVehicles] = useState([]);
+		const [loading, setLoading] = useState(true);
+	}
 		useEffect(() => {
+			async function fetchPeople() {
+				let res = await fetch("https://www.swapi.tech/api/people/")
+				let data = await res.json();
+				setPeople(data.results);
+			}
+			async function fetchPlanets() {
+				let res = await fetch("https://www.swapi.tech/api/planets/")
+				let data = await res.json();
+				setPlanets(data.results);
+			}
+			async function fetchVehicles() {
+				let res = await fetch("https://www.swapi.tech/api/vehicles/")
+				let data = await res.json();
+				setVehicles(data.results);
+			}
+			fetchPeople();
+			fetchPlanets();
+			fetchVehicles();
 			/**
 			 * EDIT THIS!
 			 * This function is the equivalent to "window.onLoad", it only runs once on the entire application lifetime
